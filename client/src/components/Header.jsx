@@ -1,10 +1,11 @@
 import React from 'react';
+import logoImg from '../assets/android-chrome-192x192.png';
 
 const Header = () => {
   return (
     <header className="header">      
       <div className="logo">  
-        <img src="/images/favicon_io/android-chrome-192x192.png" alt="Logo" />      
+        <img src={logoImg} alt="Logo" />      
         <h1>Pooja Vyas</h1>
       </div>
       <nav>

@@ -34,10 +34,13 @@ export const createUser = async (req, res) => {
 
         const token = generateToken(savedUser);
 
+        console.log('User created:', savedUser);
+
 
         res.status(201).json({message: "User registered successfuly", user:savedUser, token}); // 201 HTTP status code for created
     } catch (error) {
         res.status(500).json({ message: error.message }); // 500 HTTP status code for server error
+        console.error('Error creating user:', error.message);
     }
 }
 
@@ -94,5 +97,6 @@ export const loginUser = async (req, res) => {
         return res.status(200).json({ message: 'Login successful', user, token });
     } catch (error) {
         res.status(500).json({ message: error.message }); // 500 HTTP status code for server error
+        console.error('Error logging in user:', error.message);
     }
 }

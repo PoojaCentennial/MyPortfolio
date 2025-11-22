@@ -10,7 +10,7 @@ const ContactForm = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
-
+  const [error, setError] = useState(null);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,19 +18,26 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSending(true);
-    setIsSubmitted(false); // Reset in case of re-submission
+    try {
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(formData)
+      })
 
-    // Simulate form submission delay (e.g., waiting for an API response)
-    console.log('Form Data Captured:', formData);
+      if (!response.ok) {
+        throw new Error(response.message || 'Education submission failed');
+      }
 
-    setTimeout(() => {
-      setIsSending(false);
+      const data = await response.json();
+      console.log('Education Data Submitted:', data);
+      //navigate('/');
       setIsSubmitted(true);
-      
-      // Clear form data after successful submission
       setFormData({
         firstName: '',
         lastName: '',
@@ -39,11 +46,10 @@ const ContactForm = () => {
         message: '',
       });
 
-      // Scroll to the #about section
-      document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-
-    }, 2000); // 2 second delay
-  };
+    } catch (error) {
+      setError(error.message);
+    }
+  }
 
   return (
     <section className="contact-form-container" id="contact">
@@ -53,12 +59,18 @@ const ContactForm = () => {
       </div>
 
       <form className="contact-form" onSubmit={handleSubmit}>
-        
+
         {isSubmitted && (
           <div className="success-message">
             Thank you for your message! I'll get back to you shortly.
           </div>
         )}
+
+        {error && (
+          <div className="error-message">
+            <p>{error}</p>
+          </div>)}
+
 
         <div className="name-group">
           <div className="form-group">

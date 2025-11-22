@@ -24,10 +24,10 @@ app.use(morgan('dev'));
 
 //Routes
 
-app.use('/projects', projectRoutes);
-app.use('/users', userRoutes);
-app.use('/contacts', contactRoutes);
-app.use('/qualifications', qualificationRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/contacts', contactRoutes);
+app.use('/api/qualifications', qualificationRoutes);
 
 
 app.listen(5000);   

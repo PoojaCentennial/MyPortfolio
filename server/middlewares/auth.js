@@ -18,4 +18,20 @@ const authMiddleware = (req, res, next) => {
     }
 }
 
+export const isAdmin = (req, res, next) => {
+    if (decoded.role== 'admin')  {
+        next();
+    } else {
+        res.status(403).json({ message: "Forbidden: Admins only" });
+    }
+};
+
+export const isCustomer = (req, res, next) => {
+    if (decoded.role== 'customer')  {
+        next();
+    } else {
+        res.status(403).json({ message: "Forbidden: Customers only" });
+    }
+};
+
 export default authMiddleware;

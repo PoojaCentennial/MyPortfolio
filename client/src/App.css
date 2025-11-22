@@ -56,6 +56,28 @@ a:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.navbar {
+  display: flex;          /* puts children in a row */
+  flex-direction: row;    /* ensures horizontal layout */
+  align-items: center;     /*vertically center items */
+  justify-content: space-around; /* spread items across row */
+  font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+}
+
+/* .navbar navbar-expand-lg navbar-light bg-light {
+    display: inline;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5vw;
+    background-color: rgba(15, 23, 42, 0.95); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} */
+
 .logo {
     /* Updated styles for logo (now an anchor tag containing an image and text) */
     font-size: 1.75rem;
@@ -85,6 +107,13 @@ a:hover {
     display: flex;
     gap: 2rem;
 }
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
 
 .header nav a {
     font-weight: 600;
@@ -516,6 +545,115 @@ a:hover {
     margin-top: 2rem;
     padding: 1.5rem;
     background-color: #10B981; /* Green success color */
+    color: var(--background-color);
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.general-form-container {
+    background-color: #111827;
+    padding: 4rem 5vw;
+    text-align: center;
+    border-top: 1px solid #334155;
+    margin-top: auto;
+}
+
+.general-form-container h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.general-info {
+    color: #94A3B8;
+    margin-bottom: 3rem;
+}
+
+.general-info p {
+    margin: 0.5rem 0;
+}
+
+.general-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.general-form .name-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.general-form .form-group {
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Used inside name-group */
+}
+
+.general-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #CBD5E1;
+    font-size: 0.9rem;
+}
+
+.general-form input[type="text"],
+.general-form input[type="tel"],
+.general-form input[type="email"],
+.general-form input[type="password"],
+.general-form input[type="date"],
+.general-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #334155;
+    background-color: var(--card-background);
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.general-form input:focus,
+.general-form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.general-form textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.general-form button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.general-form button:hover:not(:disabled) {
+    background-color: #60A5FA;
+}
+
+.general-form button:disabled {
+    background-color: #4B5563; /* Grayed out when sending */
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.error-message {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #EF4444; /* Red error color */
     color: var(--background-color);
     border-radius: 8px;
     font-weight: 600;

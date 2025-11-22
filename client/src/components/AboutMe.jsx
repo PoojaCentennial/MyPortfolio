@@ -1,4 +1,5 @@
 import React from 'react';
+import profilePic from '../assets/Pooja_Portrait.jpeg';
 
 const AboutMe = () => {
   return (
@@ -6,7 +7,8 @@ const AboutMe = () => {
       <div className="about-header-content">
         {/* Placeholder image for the person's portrait */}
         <img 
-          src="/images/Pooja_Portrait.jpeg" 
+          src={profilePic} 
+          //src="client/public/Pooja_Portrait.jpeg"
           alt="Profile Portrait" 
           className="profile-image" 
         />
