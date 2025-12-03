@@ -8,7 +8,7 @@
     "dev": "concurrently 'vite' \"nodemon ../server/index.js\"",
     "build": "vite build",
     "predeploy": "npm run build",
-    "deploy": "prod -d dist",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
