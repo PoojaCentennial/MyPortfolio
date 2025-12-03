@@ -60,7 +60,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/qualifications', qualificationRoutes);
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
     res.status(200).send('Server is healthy');
 });
 
