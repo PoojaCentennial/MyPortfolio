@@ -60,6 +60,9 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/qualifications', qualificationRoutes);
+app.get('/health', (req, res) => {
+    res.status(200).send('Server is healthy');
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
