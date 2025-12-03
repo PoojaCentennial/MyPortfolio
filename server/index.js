@@ -42,9 +42,26 @@ connection.once('open', () => { console.log('Connected to MongoDB'); });
 
 const app = express();
 
-// CORS configuration for production
+// CORS configuration: allow frontend URL + localhost for development
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://poojacentennial.github.io',
+  'http://localhost:5173',
+  'http://localhost:3000'
+].filter(Boolean); // Remove undefined/empty values
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+      callback(null, true);
+    } else {
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('CORS rejected origin:', origin);
+      }
+      callback(new Error('CORS not allowed for this origin'));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
