@@ -1,0 +1,57 @@
+name: Deploy React + Vite App to GitHub Pages
+
+on:
+  # Triggers the workflow on push events to the main branch
+  push:
+    branches:
+      - main
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions to allow the deployment job to write to the repository's `gh-pages` branch
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build_and_deploy:
+    # Runs on the latest Ubuntu runner
+    runs-on: ubuntu-latest
+    
+    # Environment variables for Node.js setup
+    env:
+      NODE_VERSION: '20' # Use a stable Node.js version
+      
+    steps:
+      - name: ⚙️ Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: 🛠️ Setup Node.js
+        # Installs the specified Node.js version
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm' # Caches npm dependencies
+          cache-dependency-path: 'package-lock.json' # Adjust if you use yarn/pnpm
+      
+      - name: 📦 Install Dependencies
+        # Installs your project's npm dependencies
+        run: npm install
+        
+      - name: 🏗️ Build Vite App
+        # Executes the build command defined in your package.json (usually 'npm run build')
+        # Vite's output is typically in the 'dist' folder
+        run: npm run build
+        
+      - name: 🚀 Deploy to GitHub Pages
+        # Uses a popular action to deploy a directory to the gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # The branch where the built files will be pushed
+          publish_branch: gh-pages 
+          # *** NOTE: Vite's default build output directory is 'dist' ***
+          publish_dir: ./dist
+          # Optional: commit message
+          commit_message: Deploy React + Vite App to GitHub Pages (Build ${{ github.sha }})
