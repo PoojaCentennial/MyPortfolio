@@ -1,4 +1,5 @@
 import react, { useState } from 'react';
+import API_BASE_URL from '../config/api';
 
 const ProjectForm = () => {
     const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const ProjectForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/projects', {
+            const response = await fetch(`${API_BASE_URL}/api/projects`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

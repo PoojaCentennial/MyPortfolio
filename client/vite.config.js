@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-const repoName = 'personal-portfolio';
+const repoName = 'MyPortfolio';
 const proxyTarget = process.env.BackendURL||'http://localhost:5000';
 export default defineConfig({
   plugins: [react()],
-  //base: `/${repoName}/`
+  // For GitHub Pages, use repo name as base path (e.g., /MyPortfolio/)
+  base: process.env.NODE_ENV === 'production' ? `/${repoName}/` : '/',
   server: {
     proxy: {
       "/api": {
