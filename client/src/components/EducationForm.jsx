@@ -21,6 +21,10 @@ const EducationForm = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(localStorage.getItem('token') === null){
+            setError('You must be logged in to submit a qualification.');
+            return;
+        }
         try {
             const response = await fetch(`${API_BASE_URL}/api/qualifications`, {
                 method: 'POST',

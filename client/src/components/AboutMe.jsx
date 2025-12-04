@@ -22,7 +22,7 @@ const AboutMe = () => {
         <p>
           I am a dedicated software engineer with over 5 years of experience specializing in the **MERN stack (MongoDB, Express, React, Node.js)**. My journey began with a passion for transforming complex business requirements into intuitive and efficient user experiences.
         </p>
-        <a href="#contact" className="cta-button-small">Let's Connect</a>
+        <a href="contact" className="cta-button-small">Let's Connect</a>
       </div>
     </section>
   );

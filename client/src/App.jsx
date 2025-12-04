@@ -46,7 +46,7 @@ function App() {
   return (
     <>
 
-      <Router>
+      <Router basename="/MyPortfolio/">
         <div className="App">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="logo">
@@ -58,14 +58,17 @@ function App() {
                 <li className="nav-item">
                   <Link className='nav-link' to="/">Home</Link>
                 </li>
-                <li className="nav-item">
+                {/*<li className="nav-item">
                   <Link className='nav-link' to="/about">About</Link>
-                </li>
+                </li>*/}
                 <li className="nav-item">
                   <Link className='nav-link' to="/services">Services</Link>
                 </li>
                 <li className="nav-item">
                   <Link className='nav-link' to="/projects">Projects</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className='nav-link' to="/education">Education</Link>
                 </li>
                 <li className="nav-item">
                   <Link className='nav-link' to="/contact">Contact</Link>
@@ -92,14 +95,17 @@ function App() {
         </div>
 
         <Routes>
-          <Route path='/' element={<Hero />} />
+          <Route path='/' element={<>
+            <Hero />
+            <AboutMe />
+            </>} />
           <Route path="/register" element={<Registration setUser={setUser} />} />
           <Route path="/login" element={<Signin setUser={setUser} />} />
           <Route path='/projects' element={<Projects />} />
           <Route path='/education' element={<Education />} />
           <Route path='/services' element={<Services />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/about' element={<AboutMe />} />
+          {/*<Route path='/about' element={<AboutMe />} />*/}
           <Route path='/projectForm' element={<ProjectForm />} />
           <Route path='/educationForm' element={<EducationForm />} />
         </Routes>
