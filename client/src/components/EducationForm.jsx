@@ -1,4 +1,5 @@
 import react, { useState } from 'react';
+import API_BASE_URL from '../config/api';
 
 
 const EducationForm = () => {
@@ -20,8 +21,12 @@ const EducationForm = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(localStorage.getItem('token') === null){
+            setError('You must be logged in to submit a qualification.');
+            return;
+        }
         try {
-            const response = await fetch('/api/qualifications', {
+            const response = await fetch(`${API_BASE_URL}/api/qualifications`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

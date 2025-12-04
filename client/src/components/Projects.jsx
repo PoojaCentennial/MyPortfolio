@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ProjectForm from './ProjectForm';
 // Sample data - in a real app, this would likely come from an API or a separate data file.
 const projectData = [
   { id: 1, title: 'E-commerce Platform', description: 'A scalable e-commerce site built with React, Redux, and Firebase.', tags: ['React', 'Redux', 'Firebase'], link: '#', repo: '#' },
@@ -29,6 +31,7 @@ const Projects = () => {
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>
+      <Link to="/projectForm" className="cta-button-small">Add New Project</Link>
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const educationData = [
   { id: 1, degree: 'B.S. in Microbiology', institution: 'Sardar Patel University', dates: '2010 - 2013' },
@@ -21,6 +22,7 @@ const Education = () => {
           </div>
         ))}
       </div>
+      <Link to="/educationForm" className="cta-button-small">Add New Qualification</Link>
     </section>
   );
 };

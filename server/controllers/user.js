@@ -79,8 +79,22 @@ export const deleteUser = async (req, res) => {
 // Login user
 export const loginUser = async (req, res) => {
     try {
-        const {email, password} = req.body; // descructuring from body
-        const user = await UserModel.findOne({email})
+        // Defensive checks: ensure body is present and has required fields
+        if (!req.body || typeof req.body !== 'object') {
+            return res.status(400).json({ message: 'Missing request body' });
+        }
+
+        // Optional debug: log incoming body in non-production for troubleshooting
+        if (process.env.NODE_ENV !== 'production') {
+            console.log('Login request body:', req.body);
+        }
+
+        const { email, password } = req.body; // destructuring from body
+
+        if (!email || !password) {
+            return res.status(400).json({ message: 'Email and password are required' });
+        }
+        const user = await UserModel.findOne({ email })
 
         if (!user){
             return res.status(404).json({ message: 'User not found' }); // 404 HTTP status code for not found

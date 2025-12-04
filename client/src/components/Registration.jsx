@@ -1,5 +1,6 @@
 import react, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 import { create } from '../lib/api-user';
 
 const Registration = ({ setUser }) => {
@@ -46,7 +47,7 @@ const Registration = ({ setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/users', {
+            const response = await fetch(`${API_BASE_URL}/api/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,7 +61,7 @@ const Registration = ({ setUser }) => {
 
             const data = await response.json();
             localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.user.name);
+            localStorage.setItem('username', data.user.username);
             if (setUser) {
                 setUser({ username: data.user.username });
             }

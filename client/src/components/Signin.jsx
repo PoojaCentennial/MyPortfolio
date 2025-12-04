@@ -1,5 +1,6 @@
 import react, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 const Signin = ({ setUser }) => {
     const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const Signin = ({ setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/users/login', {
+            const response = await fetch(`${API_BASE_URL}/api/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const Signin = ({ setUser }) => {
 
             const data = await response.json();
             localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.user.name);
+            localStorage.setItem('username', data.user.username);
             if (setUser) {
                 setUser({ username: data.user.username });
             }

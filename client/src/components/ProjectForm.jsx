@@ -1,4 +1,5 @@
 import react, { useState } from 'react';
+import API_BASE_URL from '../config/api';
 
 const ProjectForm = () => {
     const [formData, setFormData] = useState({
@@ -19,8 +20,12 @@ const ProjectForm = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(localStorage.getItem('token') === null){
+            setError('You must be logged in to submit a project.');
+            return;
+        }
         try {
-            const response = await fetch('/api/projects', {
+            const response = await fetch(`${API_BASE_URL}/api/projects`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
